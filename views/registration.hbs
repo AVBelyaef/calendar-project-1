@@ -1,0 +1,22 @@
+<form method="post" action="/events">
+    <label for="name-input">Имя:</label>
+    <input name="name" type="text" value="{{user.name}}">
+
+    <label for="email-input">Email:</label>
+    <input name="email" type="text" value="{{user.email}}">
+
+    <label for="password-input">Пароль:</label>
+    <input name="password" type="text" value="{{user.password}}">
+
+    <label for="gender-input">Пол:</label>
+    <select name="gender">
+        <option value="1">Женский</option>
+        <option value="2">Мужской</option>
+
+    </select><br>
+
+    <label for="dob-input">Дата рождения:</label>
+    <input name="dob" type="text" value="{{user.dob}}">
+
+    <input type="submit" value="Зарегистрироваться">
+</form>

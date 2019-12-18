@@ -1,0 +1,17 @@
+<form method="post" action="/events">
+
+    <label for="firstDate-input">Последний визит:</label>
+    <input name="firstDate" type="text" value="{{firstDate}}">
+
+    <label for="specialist-input">Способ выполнения:</label>
+    <select name="specialist">
+        <option value="1">Посещение специалиста</option>
+        <option value="2">Самостоятельно</option>
+
+    </select><br>
+    <label for="cost-input">Стоимость:</label>
+    <input name="cost" type="text" value="{{cost}}">
+
+
+    <input type="submit" value="Сохранить">
+</form>
