@@ -1,23 +1,17 @@
 {
-  "name": "calendar-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "mongoose": "^5.8.1"
-  },
-  "devDependencies": {},
+  "name": "calendar",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx nodemon --ignore './sessions' ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ilya-mikhaylov/calendar-project.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ilya-mikhaylov/calendar-project/issues"
-  },
-  "homepage": "https://github.com/ilya-mikhaylov/calendar-project#readme"
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "mongoose": "^5.8.1",
+    "morgan": "~1.9.1"
+  }
 }
