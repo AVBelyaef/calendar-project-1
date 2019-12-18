@@ -1,3 +1,6 @@
+{{#if message}}
+    <p style="color: red;">{{this.message}}</p>
+{{/if}}
 <form method="post" action="/login">
     <label for="email-input" class="block mar-b-1">E-mail:</label>
     <input  name="email" type="text" value="{{email}}" tabindex="1">
