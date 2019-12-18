@@ -1,0 +1,13 @@
+{{calendar}}
+
+
+<ul>
+    {{#each events}}
+    <li>
+        <a href="/events/{{id}}">{{ event.name }}</a>
+        <span>Следующий визит: {{event.nextDate}}</span>
+        <span>Стоимость: {{ event.cost }}</span>
+
+    </li>
+    {{/ each}}
+</ul>
