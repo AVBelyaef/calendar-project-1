@@ -1,6 +1,6 @@
 const db = require('mongoose');
 const faker = require('faker');
-db.connect('mongodb://localhost:27017/calendar', { useNewUrlParser: true, useUnifiedTopology: true });
+db.connect('mongodb+srv://testing:12344321@cluster0-zwpfy.mongodb.net/calendar?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const User = require('../models/user');
 const Event = require('../models/event');
