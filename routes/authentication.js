@@ -1,51 +1,58 @@
 const express = require('express');
 // const bcrypt = require('bcrypt');
 const router = express.Router();
-const Users = require('../models/user');
+const User = require('../models/user');
 
 const saltRounds = 10;
 
 router.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', { message: req.query.message });
 });
 
-// router.post('/signup', async (req, res) => {
-//   const {username, email, password} = req.body;
-//   const user = new Users(
-//     {
-//       username: username,
-//       email: email,
-//       password: await bcrypt.hash(password, saltRounds)
-//     }
-//   );
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  console.log(req.body);
+  const user = await User.findOne({ email });
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    req.session.user = user;
+    res.redirect('/events');
+  } else {
+    let message = 'Вы не авторизованы, пожалуйста, проверьте свою электронную почту или логин!';
+    res.redirect(`/login?message=${message}`);
+  }
+});
+
+router.get('/signup', (req, res) => {
+  res.render('signup', {message: req.query.message});
+});
+
+router.post('/signup', async (req, res) => {
+  const { name, email, password, gender } = req.body;
+  const user = new User(
+    {
+      email: email,
+      password: await bcrypt.hash(password, saltRounds),
+      name: name,
+      gender: gender,
+      dob: Date(),
+    }
+  );
+  const dbusername = await User.findOne({ name });
+  const dbemail = await User.findOne({ email });
+  if (dbusername && dbusername.name === name) {
+    let message = 'Имя пользователя уже используется, выберите другое имя';
+    res.redirect(`/entries/signup?message=${message}`)
+  } else if (dbemail && dbemail.email === email) {
+    let message = 'Email уже используется, пожалуйста, выберите другой';
+    res.redirect(`/entries/signup?message=${message}`)
+  } else {
+    await user.save();
+    req.session.user = user;
+    res.redirect('/entries');
+  }
+});
 //
-//   const dbusername = await Users.findOne({username});
-//   const dbemail = await Users.findOne({email});
-//   if (dbusername && dbusername.username === username) {
-//     let message = 'Username is already used, please choose another';
-//     res.redirect(`/entries/signup?message=${message}`)
-//   } else if (dbemail && dbemail.email === email) {
-//     let message = 'Email is already used, please choose another';
-//     res.redirect(`/entries/signup?message=${message}`)
-//   } else {
-//     await user.save();
-//     req.session.user = user;
-//     res.redirect('/entries');
-//   }
-// });
-//
-// router.post('/login', async (req, res) => {
-//   const {username, password} = req.body;
-//   const user = await Users.findOne({username});
-//
-//   if (user && (await bcrypt.compare(password, user.password))) {
-//     req.session.user = user;
-//     res.redirect('/entries');
-//   } else {
-//     let message = 'You are not authorized, please check your username or login!';
-//     res.redirect(`/entries/login?warningMessage=${message}`);
-//   }
-// });
 //
 // router.get('/logout', async (req, res, next) => {
 //   if (req.session.user) {
@@ -57,7 +64,7 @@ router.get('/login', (req, res) => {
 //       next(error);
 //     }
 //   } else {
-//     res.redirect("/entries/login");
+//     res.redirect("/login");
 //   }
 // });
 
