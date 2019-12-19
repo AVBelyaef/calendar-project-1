@@ -1,0 +1,62 @@
+<div class="'container m-3 p-4">
+<form method="post" action="/events">
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Вид задачи</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="activity">
+            <option value="Маникюр" selected>Маникюр</option>
+            <option value="Педикюр">Педикюр</option>
+            <option value="Эпиляция">Эпиляция</option>
+            <option value="Пилинг">Пилинг</option>
+            <option value="Брови">Брови</option>
+            <option value="Ресницы">Ресницы</option>
+            <option value="Стрижка">Стрижка</option>
+            <option value="Окрашивание">Окрашивание</option>
+            <option value="Гинеколог">Гинеколог</option>
+            <option value="Чистка зубов">Чистка зубов</option>
+        </select>
+    </div>
+
+    <div class="input-group mb-3 form-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Последний визит</span>
+        </div>
+        <input class="form-control" type="date" name="firstDate" required/>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Периодичность (дней)</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="period">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Предупреждать за (дней)</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="notifyBefore">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Процедура проходит у специалиста?</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="specialist">
+            <option value="true" selected>Да</option>
+            <option value="false">Нет</option>
+        </select>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Стоимость</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="cost">
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Сохранить">
+</form>
+</div>

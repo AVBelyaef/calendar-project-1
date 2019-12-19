@@ -16,9 +16,11 @@
             </ul>
             <div class="card-body">
                 <a href="/events/{{this._id}}" class="card-link">Редактировать</a>
-                <a href="/events/{{this._id}}/delete" class="card-link">Удалить</a>
+                <a href="#" id="{{this._id}}" class="card-link delete-link">Удалить</a>
             </div>
         </li>
         {{/each}}
 
     </ul>
+
+<script src="/javascripts/events.js" defer></script>
