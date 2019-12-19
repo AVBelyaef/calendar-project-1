@@ -17,18 +17,29 @@
                 <label>Пароль:</label>
                 <input class="border form-control" type="password" name="password" required/>
             </div>
-                <div class="form-group">
-                    <label>Пол:</label>
-                    <select class="custom-select">
-                        <!--                    <option selected>Open this select menu</option>-->
-                        <option value="1">Женский</option>
-                        <option value="2">Мужской</option>
-                    </select>
+            <div class="form-group">
+                <label>Пол:</label>
+<!--                <select class="custom-select">-->
+<!--                    &lt;!&ndash;                    <option selected>Open this select menu</option>&ndash;&gt;-->
+<!--                    <option name="password" value="1">Женский</option>-->
+<!--                    <option value="2">Мужской</option>-->
+<!--                </select>-->
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="gender" value="F" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Женский</label>
                 </div>
-                <div class="form-group">
-                    <label>Дата рождения:</label>
-                    <input class="border form-control" type="text" name="email" required/>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="gender" value="M" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2" >Мужской</label>
                 </div>
+            </div>
+            <div class="form-group">
+                <label>Дата рождения:</label>
+                <input class="border form-control" type="date" name="dob" required/>
+            </div>
+
+
+
             <div>
                 <input class="btn btn-primary" type="submit" value="Зарегистрироваться"/>
             </div>

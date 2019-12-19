@@ -11,13 +11,14 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  // console.log(req.body);
+  console.log(email)
   const user = await User.findOne({ email });
+  console.log(user);
   if (user && (await bcrypt.compare(password, user.password))) {
     req.session.user = user;
     res.redirect('/events');
   } else {
-    let message = 'Вы не авторизованы, пожалуйста, проверьте свою электронную почту или логин!';
+    let message = 'Вы не авторизованы, пожалуйста, проверьте свою электронную почту или пароль!';
     res.redirect(`/login?message=${message}`);
   }
 });
@@ -27,17 +28,18 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-  const { name, email, password, gender } = req.body;
+  console.log(req.body)
+  const { name, email, password, gender, dob } = req.body;
   const user = new User(
     {
       email: email,
       password: await bcrypt.hash(password, saltRounds),
       name: name,
       gender: gender,
-      dob: Date(),
+      dob: new Date(dob),
     }
   );
-  const dbusername = await User.findOne({ name });
+
   const dbemail = await User.findOne({ email });
   if (dbemail && dbemail.email === email) {
     let message = 'Email уже используется, пожалуйста, выберите другой';
@@ -45,7 +47,7 @@ router.post('/signup', async (req, res) => {
   } else {
     await user.save();
     req.session.user = user;
-    res.redirect('/entries');
+    res.redirect('/events');
   }
 });
 

@@ -4,7 +4,7 @@ const useErrorHandlers = require("./middleware/error-handlers");
 const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
 const authenticationRouter = require('./routes/authentication');
-
+require('./middleware/db-connect');
 
 
 const app = express();
