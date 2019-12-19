@@ -7,7 +7,6 @@ module.exports = function (app) {
   const FileStore = require('session-file-store')(session);
   const { cookiesCleaner } = require('./auth');
 
-  // Подключаем views(hbs)
   app.set('views', path.join(__dirname, '..', 'views'));
   app.set('view engine', 'hbs');
 
@@ -17,15 +16,15 @@ module.exports = function (app) {
   app.use(cookieParser());
 
   app.use(express.static(path.join(__dirname, '..', 'public')));
-  // app.use(session({
-  //   store: new FileStore(),
-  //   key: 'user_sid',
-  //   secret: 'very secret',
-  //   resave: false,
-  //   saveUninitialized: false,
-  //   cookie: {
-  //     expires: 600000
-  //   }
-  // }));
+  app.use(session({
+    store: new FileStore(),
+    key: 'user_sid',
+    secret: 'very secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 600000
+    }
+  }));
 
 };
