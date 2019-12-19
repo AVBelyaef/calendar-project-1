@@ -6,10 +6,28 @@ const Event = require('../models/event');
 
 const saltRounds = 10;
 
+// router.get('/events', async function(req, res, next) {
+//     req.session.user = user;
+//     const userEvents = await Event.find({user: req.session.id}); /// Что мы получаем из кук? TODO: Отфильтровать по месяцу, категориям,
+//     res.render('events', {calendar: 'calendar', events: await userEvents}); /// TODO: Обновить календарь
+// });
+
 router.get('/events', async function(req, res, next) {
-    req.session.user = user;
-    const userEvents = await Event.find({user: req.session.id}); /// Что мы получаем из кук?
-    res.render('events', {calendar: 'calendar', events: await userEvents}); /// TODO: Обновить календарь
+    try {
+        const events = await Event.find({user: req.session.user._id}); /// Что мы получаем из кук? TODO: Отфильтровать по месяцу, категориям,
+        await console.log(events);
+        res.render('events', {events}); /// TODO: Обновить календарь
+    } catch(e) {
+        console.log(e)
+    }
+});
+
+router.get('/events/new', async function(req, res, next) {
+    try {
+        res.render('redactor');
+    } catch(e) {
+        console.log(e);
+    }
 });
 
 router.post('/events', async function(req, res, next) {
@@ -51,7 +69,7 @@ router.put('/events:id', async function(req, res, next) {
     }
 });
 
-router.delete('/events:id', async function(req, res, next) {
+router.delete('/events:id/delete', async function(req, res, next) {
 if (req.session.user) {
     await Entry.deleteOne({'_id': req.params.id});
     res.redirect('/events');

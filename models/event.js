@@ -1,7 +1,7 @@
 const db = require('mongoose');
 
 const eventSchema = db.Schema({
-    user: {type: db.Schema.ObjectId, ref: 'User'},
+    user: {type: db.Schema.ObjectId, ref: 'User', required: true},
     activity: {type: String, required: true},
     firstDate: {type: Date, required: true},
     period: {type: Number, required: true},

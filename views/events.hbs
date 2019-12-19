@@ -1,13 +1,24 @@
 {{calendar}}
 
+    <ul class="card-group">
 
-<ul>
-    {{#each events}}
-    <li>
-        <a href="/events/{{id}}">{{ event.name }}</a>
-        <span>Следующий визит: {{event.nextDate}}</span>
-        <span>Стоимость: {{ event.cost }}</span>
+        {{#each events}}
+        <li class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{this.activity}}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Следующий визит <b>{{nextDate}}</b></li>
+                {{#if this.cost}}
+                <li class="list-group-item">Стоимость <b>{{this.cost}}</b></li>
+                {{/if}}
+            </ul>
+            <div class="card-body">
+                <a href="/events/{{this._id}}" class="card-link">Редактировать</a>
+                <a href="/events/{{this._id}}/delete" class="card-link">Удалить</a>
+            </div>
+        </li>
+        {{/each}}
 
-    </li>
-    {{/ each}}
-</ul>
+    </ul>
