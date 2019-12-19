@@ -1,4 +1,116 @@
-{{calendar}}
+<div id="calendarContainer"></div>
+<div id="organizerContainer"></div>
+        <input class="dataCalendar" type="hidden" value="{{{eventsForCalendar}}}">
+<script src="/script/calendarorganizer.min.js"></script>
+<script defer>
+    "use strict";
+
+    // function that creates dummy data for demonstration
+    function createDummyData() {
+    	let date = new Date();
+    	let data = {};
+    	for (let i = 0; i < 10; i++) {
+    		data[date.getFullYear() + i] = {};
+
+    		for (let j = 0; j < 12; j++) {
+    			data[date.getFullYear() + i][j + 1] = {};
+
+    			for (let k = 0; k < Math.ceil(Math.random() * 10); k++) {
+    				let l = Math.ceil(Math.random() * 28);
+
+    				try {
+    					data[date.getFullYear() + i][j + 1][l].push({
+    						startTime: "10:00",
+    						endTime: "12:00",
+    						text: "Some Event Here"
+    					});
+    				} catch (e) {
+    					data[date.getFullYear() + i][j + 1][l] = [];
+    					data[date.getFullYear() + i][j + 1][l].push({
+    						startTime: "10:00",
+    						endTime: "12:00",
+    						text: "Some Event Here"
+    					});
+    				}
+    			}
+    		}
+    	}
+    	return data;
+    }
+
+    // creating the dummy static data
+    const isProdData = 1;
+    let data;
+    if (isProdData) {
+        <!--data = {{eventsForCalendar}};-->
+        data = createDummyData();
+    } else {
+        data = {
+            // December 25, 2017
+            2019: {
+                12: {
+                    25: [
+                        // Christmas Day
+                        {
+                            startTime: "00:00",
+                            endTime: "24:00",
+                            text: "Christmas Day"
+                        },
+                        // Christmas Dinner
+                        {
+                            startTime: "5:00pm",
+                            endTime: "11:00pm",
+                            text: "Christmas Dinner"
+                        }
+                    ],
+                    20: [
+                        // Party Day
+                        {
+                            startTime: "19:00",
+                            endTime: "24:00",
+                            text: "Party Day"
+                        }
+                    ]
+                }
+            }
+        };
+    }
+
+
+    // initializing a new calendar object, that will use an html container to create itself
+
+    let calendar = new Calendar("calendarContainer", // id of html container for calendar
+
+            "medium", // size of calendar, can be small | medium | large
+            [
+                "Monday", // left most day of calendar labels
+                3 // maximum length of the calendar labels
+            ], [
+                "#ffc107", // primary color
+                "#ffa000", // primary dark color
+                "#ffffff", // text color
+                "#ffecb3", // text dark color
+                "#e4a199", // text dark color
+            ],
+            {
+                // placeholder: "" // Removes Organizer's Placeholder
+                placeholder: "<button style='width: calc(100% - 16px); background-color: #E6E6E6; border-radius: 6px; margin: 8px; border: none; padding: 12px 0px; cursor: pointer;'>Add New Event</button>",
+                indicator: true,
+                indicator_type: 1, // indicator type, can be 0 (not numeric) | 1 (numeric)
+                indicator_pos: "bottom" // indicator position, can be top | bottom
+            }
+    );
+    fetch('/data')
+            .then(res => res.json())
+            .then(data => {
+                let organizer = new Organizer("organizerContainer", // id of html container for calendar
+                        calendar, // defining the calendar that the organizer is related to
+                        data // giving the organizer the static data that should be displayed
+                );
+            })
+    // initializing a new organizer object, that will use an html container to create itself
+
+</script>
 
 
 <ul>

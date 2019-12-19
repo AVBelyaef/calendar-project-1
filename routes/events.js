@@ -6,10 +6,53 @@ const Event = require('../models/event');
 
 const saltRounds = 10;
 
+const parserDataFromBD = (response) => {
+    const data = {};
+    if (response.length !== 0) {
+        for (let item of response){
+            const yearFromItem = item.firstDate.getFullYear();
+            const monthFromItem = item.firstDate.getMonth() + 1;
+            const dayFromItem = item.firstDate.getDate();
+            if (!(yearFromItem.toString() in data)) {
+                data[yearFromItem] = {};
+                // return(data);
+            }
+            if (!(monthFromItem.toString() in data[yearFromItem])) {
+                data[yearFromItem][monthFromItem] = {};
+                // return(data);
+            }
+            if (!(dayFromItem.toString() in data[yearFromItem][monthFromItem])) {
+                data[yearFromItem][monthFromItem][dayFromItem] = [];
+                // return(data);
+            }
+            const curentEvent = {
+                startTime: "00:00",
+                endTime: "24:00",
+                text: item.activity
+            };
+            data[yearFromItem][monthFromItem][dayFromItem].push(curentEvent);
+            // return(data);
+        }
+    }
+    console.log(data);
+    return data;
+};
+
 router.get('/events', async function(req, res, next) {
-    req.session.user = user;
-    const userEvents = await Event.find({user: req.session.id}); /// Что мы получаем из кук?
-    res.render('events', {calendar: 'calendar', events: await userEvents}); /// TODO: Обновить календарь
+    // req.session.user = user;
+    const events = await Event.find({user: '5dfb1a3d5dac8e46747241a3'});
+    // parserDataFromBD(events);
+    // res.send(parserDataFromBD(events));
+    res.render('events', {eventsForCalendar: parserDataFromBD(events)});
+    // console.log(parserDataFromBD(events));
+    // console.log(typeof events[1].firstDate.getFullYear());
+    // const userEvents = await Event.find({user: req.session.id}); /// Что мы получаем из кук?
+    // res.render('events', {calendar: 'calendar', events: await userEvents}); /// TODO: Обновить календарь
+});
+
+router.get('/data', async function (req, res) {
+    const events = await Event.find({user: '5dfb1a3d5dac8e46747241a3'});
+    return res.json(parserDataFromBD(events));
 });
 
 router.post('/events', async function(req, res, next) {
