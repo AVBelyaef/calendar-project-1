@@ -14,28 +14,8 @@ const saltRounds = 10;
 
 router.get('/events', async function(req, res, next) {
     try {
-
-        let dateTomorrow = new Date();
-        let aaa = new Date();
-        let dateNow = new Date();
-        let date = new Date();
-        date.setDate(date.getDate() - 1);
-        dateTomorrow.setDate(date.getDate() + 1);
-        aaa.setDate(date.getDate() + 5);
-        const eve = await Event.find({ firstDate: { $gte: date, $lte: dateTomorrow } })
-        // const events = await Event.find({ firstDate: { $gte: '2019-12-01', $lte: '2019-12-20' } })
-         console.log(eve)
 // ToDo: найти пользователей по статьям
         const users = await User.find()
-
-
-
-
-
-
-
-
-
         const events = await Event.find({user: req.session.user._id}); /// Что мы получаем из кук? TODO: Отфильтровать по месяцу, категориям,
         // await console.log(events);
         res.render('events', {events}); /// TODO: Обновить календарь
