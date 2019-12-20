@@ -39,7 +39,7 @@
 }
 
 .cjslib-year {
-    width: calc(100% - 10px);
+    /*width: calc(100% - 10px);*/
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -88,8 +88,9 @@
 }
 
 .cjslib-month {
+    background-color: #9A74A1;
     z-index: 1;
-    width: calc(100% - 10px);
+    /*width: calc(100% - 10px);*/
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -375,7 +376,7 @@
 }
 
 .cjslib-date {
-    width: calc(100% - 10px);
+    /*width: calc(100% - 10px);*/
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
