@@ -12,7 +12,7 @@ router.get('/events', async function(req, res, next) {
         const users = await User.find()
         const events = await Event.find({user: req.session.user._id}); /// Что мы получаем из кук? TODO: Отфильтровать по месяцу, категориям,
         res.render('events', {events}); /// TODO: Обновить календарь
-        const events = await Event.find({user: req.session.user._id}); /// Что мы получаем из кук? TODO: Отфильтровать по месяцу, категориям,
+        // const events = await Event.find({user: req.session.user._id}); /// Что мы получаем из кук? TODO: Отфильтровать по месяцу, категориям,
         console.log(events)
         res.render('events', {events: events, title: 'Твои активности'}); /// TODO: Обновить календарь
     } catch(e) {
