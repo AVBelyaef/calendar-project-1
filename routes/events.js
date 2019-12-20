@@ -6,19 +6,12 @@ const Event = require('../models/event');
 
 const saltRounds = 10;
 
-// router.get('/events', async function(req, res, next) {
-//     req.session.user = user;
-//     const userEvents = await Event.find({user: req.session.id}); /// Что мы получаем из кук? TODO: Отфильтровать по месяцу, категориям,
-//     res.render('events', {calendar: 'calendar', events: await userEvents}); /// TODO: Обновить календарь
-// });
-
 router.get('/events', async function(req, res, next) {
     try {
-        // const date1 = Date.
-        // const findDate = await Event.find({activity: 'Маникюр'});
-        // await console.log(findDate[0].firstDate);
-        // const date1 = await findDate[0].firstDate;
-        // await console.log(date1.getDate());
+// ToDo: найти пользователей по статьям
+        const users = await User.find()
+        const events = await Event.find({user: req.session.user._id}); /// Что мы получаем из кук? TODO: Отфильтровать по месяцу, категориям,
+        res.render('events', {events}); /// TODO: Обновить календарь
         const events = await Event.find({user: req.session.user._id}); /// Что мы получаем из кук? TODO: Отфильтровать по месяцу, категориям,
         console.log(events)
         res.render('events', {events: events, title: 'Твои активности'}); /// TODO: Обновить календарь

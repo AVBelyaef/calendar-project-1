@@ -43,7 +43,7 @@ router.post('/signup', async (req, res) => {
   const dbemail = await User.findOne({ email });
   if (dbemail && dbemail.email === email) {
     let message = 'Email уже используется, пожалуйста, выберите другой';
-    res.redirect(`/entries/signup?message=${message}`)
+    res.redirect(`/signup?message=${message}`)
   } else {
     await user.save();
     req.session.user = user;
