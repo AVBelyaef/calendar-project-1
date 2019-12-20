@@ -118,4 +118,39 @@ router.delete('/events/:id', async function(req, res, next) {
     }
 });
 
+const parserDataFromBD = (response) => {
+    const data = {};
+    if (response.length !== 0) {
+        for (let item of response){
+            const yearFromItem = item.firstDate.getFullYear();
+            const monthFromItem = item.firstDate.getMonth() + 1;
+            const dayFromItem = item.firstDate.getDate();
+
+            if (!(yearFromItem.toString() in data)) {
+                data[yearFromItem] = {};
+            }
+            if (!(monthFromItem.toString() in data[yearFromItem])) {
+                data[yearFromItem][monthFromItem] = {};
+            }
+            if (!(dayFromItem.toString() in data[yearFromItem][monthFromItem])) {
+                data[yearFromItem][monthFromItem][dayFromItem] = [];
+            }
+            const curentEvent = {
+                startTime: "00:00",
+                endTime: "24:00",
+                text: item.activity
+            };
+            data[yearFromItem][monthFromItem][dayFromItem].push(curentEvent);
+        }
+    }
+    console.log(data);
+    return data;
+};
+
+router.get('/data', async function (req, res, next) {
+    const events = await Event.find({user: '5dfb40010252f6417aa47901'});
+    console.log(events);
+    return res.json(parserDataFromBD(events));
+});
+
 module.exports = router;
