@@ -64,40 +64,45 @@ router.post('/events', async function(req, res, next) {
 
 router.get('/events/:id', async function(req, res, next) {
     try {
-        const event = await Event.find({_id: req.params._id});
-        function specialist(e) {
-            if (e === true) return 'Да';
-            else return 'Нет'
-        }
-        await console.log(event.period);
+        const event = await Event.findById(req.params.id);
+        // function specialist(e) {
+        //     if (e === true) return 'Да';
+        //     else return 'Нет'
+        // }
+        console.log(event);
+        console.log(event.period);
         res.render('editor', {
             title: 'Редактировать задачу',
             header: 'Редактировать задачу',
-            method: 'put',
+            method: 'post',
             action: 'Редактировать',
             event: event,
             activity: event.activity,
             firstDate: event.firstDate,
-            period: await event.period,
+            period: event.period,
             notifyBefore: event.notifyBefore,
-            specialist: specialist(event.specialist),
+            specialist: event.specialist,
             cost: event.cost,
+            put: 'put',
+            id: req.params.id,
         });
     } catch(e) {
         console.log(e);
     }
 });
 
-router.put('/events:id', async function(req, res, next) {
+router.put('/events/:id', async function(req, res, next) {
+    console.log('>>> PUT');
     if (req.session.user) {
         const entry = await Event.findById(req.params.id);
-        entry.user = req.session.user;
+        // entry.user = req.session.user._id;
+        console.log(entry);
         entry.activity = req.body.activity;
         entry.firstDate = req.body.firstDate;
-        entry.period = req.body.period;
-        entry.notifyBefore = req.body.notifyBefore;
+        entry.period = Number(req.body.period);
+        entry.notifyBefore = Number(req.body.notifyBefore);
         entry.specialist = req.body.specialist;
-        entry.cost = req.body.cost;
+        entry.cost = Number(req.body.cost);
         await entry.save();
         res.redirect(`/events`);
     } else {
@@ -108,14 +113,49 @@ router.put('/events:id', async function(req, res, next) {
 router.delete('/events/:id', async function(req, res, next) {
     try {
         if (req.session.user) {
-            await Event.deleteOne({'_id': req.params._id});
-            // res.redirect('/events');
+            await Event.deleteOne({'_id': req.params.id});
+            res.end();
         } else {
             res.render('error', {message: 'Unauthorized operation'})
         }
     } catch(e) {
         console.log(e);
     }
+});
+
+const parserDataFromBD = (response) => {
+    const data = {};
+    if (response.length !== 0) {
+        for (let item of response){
+            const yearFromItem = item.firstDate.getFullYear();
+            const monthFromItem = item.firstDate.getMonth() + 1;
+            const dayFromItem = item.firstDate.getDate();
+
+            if (!(yearFromItem.toString() in data)) {
+                data[yearFromItem] = {};
+            }
+            if (!(monthFromItem.toString() in data[yearFromItem])) {
+                data[yearFromItem][monthFromItem] = {};
+            }
+            if (!(dayFromItem.toString() in data[yearFromItem][monthFromItem])) {
+                data[yearFromItem][monthFromItem][dayFromItem] = [];
+            }
+            const curentEvent = {
+                startTime: "00:00",
+                endTime: "24:00",
+                text: item.activity
+            };
+            data[yearFromItem][monthFromItem][dayFromItem].push(curentEvent);
+        }
+    }
+    console.log(data);
+    return data;
+};
+
+router.get('/data', async function (req, res, next) {
+    const events = await Event.find({user: '5dfb40010252f6417aa47901'});
+    console.log(events);
+    return res.json(parserDataFromBD(events));
 });
 
 module.exports = router;
