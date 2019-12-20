@@ -1,9 +1,20 @@
-body {
+/* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+} */
+
+body {
+  background: url(../images/TebPWZ6.jpg) no-repeat center center fixed;
+
 }
+
+.card{
+  background-color: #FFF5FB;
+}
+
+
 

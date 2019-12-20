@@ -1,13 +1,17 @@
+
+<body style="background-image: linear-gradient(to right top, #ff9bc4, #ffafb3, #ffc8b0, #ffdfbd, #fbf4d7);">
+
 <div id="calendarContainer"></div>
 <div id="organizerContainer"></div>
 <script src="/javascripts/calendarorganizer.min.js" defer></script>
 <script src="/javascripts/calendarForView.js" defer></script>
 
+
     <ul class="card-group">
 
         {{#each events}}
         <li class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            {{!-- <img src="..." class="card-img-top" alt="..."> --}}
             <div class="card-body">
                 <h5 class="card-title">{{this.activity}}</h5>
             </div>
@@ -25,5 +29,7 @@
         {{/each}}
 
     </ul>
+
+</body>
 
 <script src="/javascripts/events.js" defer></script>

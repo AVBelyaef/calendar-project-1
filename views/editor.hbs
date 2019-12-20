@@ -1,4 +1,6 @@
-<div class="'container m-3 p-4">
+
+
+<div class="container m-3 p-4">
     {{#if put}}
     <form method="{{method}}" action="/events/{{id}}">
         <input type="hidden" name="_method" value="put">
@@ -6,25 +8,11 @@
     <form method="{{method}}" action="/events">
     {{/if}}
 
-    <h1>{{header}}</h1>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Вид задачи</label>
-        </div>
-        <select class="custom-select" id="inputGroupSelect01" name="activity">
-            <option value="Маникюр" selected>Маникюр</option>
-            <option value="Педикюр">Педикюр</option>
-            <option value="Эпиляция">Эпиляция</option>
-            <option value="Пилинг">Пилинг</option>
-            <option value="Брови">Брови</option>
-            <option value="Ресницы">Ресницы</option>
-            <option value="Стрижка">Стрижка</option>
-            <option value="Окрашивание">Окрашивание</option>
-            <option value="Гинеколог">Гинеколог</option>
-            <option value="Чистка зубов">Чистка зубов</option>
-        </select>
-    </div>
+    <div style="width: 30vw" class="container m-3 p-4">
+        <form method="{{method}}" action="/events">
+
+            <h1>{{header}}</h1>
 
     <div class="input-group mb-3 form-group">
         <div class="input-group-prepend">
@@ -87,6 +75,15 @@
         {{/if}}
     </div>
 
-    <input class="btn btn-primary" type="submit" value="{{action}}">
-</form>
-</div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Стоимость</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default" name="cost">
+            </div>
+
+            <input style=" background-color: #9A74A1; border-color: #9A74A1" class="btn btn-primary" type="submit"
+                value="{{action}}">
+        </form>
+    </div>

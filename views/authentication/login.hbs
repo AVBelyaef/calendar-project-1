@@ -1,10 +1,10 @@
-<div class="container">
-    <div class="card m-3 p-4">
+<div style ="width: 25vw;"class="container">
+    <div style=" background-color: black; color: #FFF5FB" class="card m-3 p-4">
         {{#if message}}
             <p style="color: red;">{{this.message}}</p>
         {{/if}}
         <form action="/login" method="POST">
-            <div class="form-group">
+            <div class="form-group" >
                 <label>E-mail:</label>
                 <input class="border form-control" type="text" name="email"/>
             </div>
@@ -13,10 +13,10 @@
                 <input class="border form-control" type="password" name="password"/>
             </div>
             <div class="form-group">
-                <input class="btn btn-primary" type="submit" value="Войти"/>
+                <input style ="width: 100%; background-color:#DAD4E4; border-color:#DAD4E4; color:black;" class="btn btn-primary" type="submit" value="Войти"/>
             </div>
             <div>
-                <a class="btn btn-outline-secondary" href="/signup" role="button">Регистрация</a>
+                <a  style ="width: 100%; background-color: #9A74A1; color:#DAD4E4"  class="btn btn-outline-secondary" href="/signup" role="button">Регистрация</a>
             </div>
         </form>
     </div>
