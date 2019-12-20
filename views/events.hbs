@@ -1,10 +1,18 @@
-{{calendar}}
+
+<div class="event-container">
+
+    <div>
+<div id="calendarContainer"></div>
+<div id="organizerContainer"></div>
+<script src="/javascripts/calendarorganizer.min.js" defer></script>
+<script src="/javascripts/calendarForView.js" defer></script>
+    </div>
 
     <ul class="card-group">
 
         {{#each events}}
         <li class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            {{!-- <img src="..." class="card-img-top" alt="..."> --}}
             <div class="card-body">
                 <h5 class="card-title">{{this.activity}}</h5>
             </div>
@@ -16,9 +24,13 @@
             </ul>
             <div class="card-body">
                 <a href="/events/{{this._id}}" class="card-link">Редактировать</a>
-                <a href="/events/{{this._id}}/delete" class="card-link">Удалить</a>
+                <a href="/events" id="{{this._id}}" class="delete-link card-link">Удалить</a>
             </div>
         </li>
         {{/each}}
 
     </ul>
+
+</div>
+
+<script src="/javascripts/events.js" defer></script>

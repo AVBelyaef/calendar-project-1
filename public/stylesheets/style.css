@@ -1,8 +1,42 @@
-body {
+/* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+} */
+
+body {
+  background: url(../images/TebPWZ6.jpg) no-repeat center center fixed;
+
+}
+
+.card{
+  background-color: #FFF5FB;
+}
+
+.card-group>.card {
+  margin-bottom: 20px;
+}
+
+.event-container {
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card-group {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+}
+
+a {
+  color: #9A74A1;
+}
+
+a:hover {
+  color: #5C3A64;
 }
