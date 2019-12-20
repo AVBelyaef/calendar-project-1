@@ -153,7 +153,7 @@ const parserDataFromBD = (response) => {
 };
 
 router.get('/data', async function (req, res, next) {
-    const events = await Event.find({user: '5dfb40010252f6417aa47901'});
+    const events = await Event.find({user: req.session.user._id});
     console.log(events);
     return res.json(parserDataFromBD(events));
 });
