@@ -14,7 +14,7 @@ useMiddleware(app);
 
 app.use(function (req, res, next) {
     app.locals.isAuth = !!req.session.user;
-    if (req.session.user) {app.locals.name = req.session.user.username}
+    if (req.session.user) {app.locals.name = req.session.user.name}
     next()
 });
 
