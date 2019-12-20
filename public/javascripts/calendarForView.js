@@ -8,11 +8,12 @@ let calendar = new Calendar("calendarContainer", // id of html container for cal
     "Monday", // left most day of calendar labels
     3 // maximum length of the calendar labels
   ], [
-    "#ffc107", // primary color
-    "#ffa000", // primary dark color
-    "#ffffff", // text color
-    "#ffecb3", // text dark color
-    "#e4a199", // text dark color
+        "#FFFBEB", // primary color
+        "#905E9C", // primary dark color
+        "#663B4D", // text color
+        "#ffecb3", // text dark color
+
+        "#ffffff"
   ],
   {
     indicator: true,
