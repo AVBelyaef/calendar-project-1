@@ -11,9 +11,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  console.log(email)
   const user = await User.findOne({ email });
-  console.log(user);
   if (user && (await bcrypt.compare(password, user.password))) {
     req.session.user = user;
     res.redirect('/events');
@@ -28,7 +26,6 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-  console.log(req.body)
   const { name, email, password, gender, dob } = req.body;
   const user = new User(
     {
