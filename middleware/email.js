@@ -11,7 +11,7 @@ setInterval(async function sendMails() {
   // const usersArr = await User.find().select({ _id: 0, email: 1 }).where('_id').in(ids);
   // const email = usersArr.map(e => e.email);
   // console.log(email);
-  const email = ['avbelyaef@ya.ru', 'bshurik-nn@yandex.ru']
+
 
   // email.forEach(async (e) => {
   for (let i = 0; i < email.length; i ++) {
