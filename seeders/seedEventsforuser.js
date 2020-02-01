@@ -43,4 +43,4 @@ async function seedBase(eventsCount) {
     await db.disconnect();
 }
 
-seedBase(20);
+seedBase(5);
