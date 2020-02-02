@@ -1,7 +1,6 @@
 # calendar-project
-
+Наш проект на heroku [https://woman-calendar.herokuapp.com/](https://woman-calendar.herokuapp.com/)
 # О приложении
-
 # Локальный запуск
     npm install
     npm start
